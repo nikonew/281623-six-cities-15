@@ -1,4 +1,5 @@
 import OfferCard from '../../componets/offer-card/offer-card';
+// import MainEmptyPage from '../main-empty-page/main-empty-page';
 
 type MainPageProps = {
     cardCount: number;
@@ -122,7 +123,8 @@ export default function MainPage ({cardCount}: MainPageProps): JSX.Element {
                   <p className="place-card__type">Apartment</p>
                 </div>
               </article> премиум карточка*/}
-              {Array.from({length: cardCount}, OfferCard) }
+              {cardCount > 0 ? Array.from({length: cardCount}, OfferCard) : 'there is no card' }
+              {/* {cardCount === 0 && Array.from({length: cardCount}, MainEmptyPage)} */}
             </div>
           </section>
           <div className="cities__right-section">
