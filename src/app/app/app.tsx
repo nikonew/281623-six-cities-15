@@ -27,10 +27,10 @@ export default function App({cardCount}: AppScreenProps): JSX.Element {
           path={AppRoute.Favorites}
           element={<FavoritePage />}
         />
-        <Route
-          path={AppRoute.Offer}
-          element={<OfferPage />}
-        />
+        <Route path={AppRoute.Offer}>
+          <Route index element={<OfferPage />} />
+          <Route path=':id' element={<OfferPage />} />
+        </Route>
         <Route
           path="*"
           element={<NotFoundPage />}
