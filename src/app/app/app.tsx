@@ -1,10 +1,11 @@
-import { AppRoute } from '../router/router/router';
+import { AppRoute, AuthorizationStatus } from '../router/router/router';
 import MainPage from '../../pages/main-page/main-page';
 import {Route, BrowserRouter, Routes} from 'react-router-dom';
 import LoginPage from '../../pages/login-page/login-page';
 import OfferPage from '../../pages/offer-page/offer-page';
 import FavoritePage from '../../pages/favorite-page/favorite-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
+import PrivateRoute from '../private-route/private-route';
 
 
 type AppScreenProps = {
@@ -25,7 +26,13 @@ export default function App({cardCount}: AppScreenProps): JSX.Element {
         />
         <Route
           path={AppRoute.Favorites}
-          element={<FavoritePage />}
+          element={
+            <PrivateRoute
+              authorizationStatus={AuthorizationStatus.NoAuth}
+            >
+              <FavoritePage />
+            </PrivateRoute>
+          }
         />
         <Route path={AppRoute.Offer}>
           <Route index element={<OfferPage />} />
