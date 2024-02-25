@@ -5,7 +5,7 @@ import LoginPage from '../../pages/login-page/login-page';
 import OfferPage from '../../pages/offer-page/offer-page';
 import FavoritePage from '../../pages/favorite-page/favorite-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
-import PrivateRoute from '../private-route/private-route';
+import PrivateRoute from '../router/private-route';
 
 
 type AppScreenProps = {
@@ -34,10 +34,10 @@ export default function App({cardCount}: AppScreenProps): JSX.Element {
             </PrivateRoute>
           }
         />
-        <Route path={AppRoute.Offer}>
-          <Route index element={<OfferPage />} />
-          <Route path=':id' element={<OfferPage />} />
-        </Route>
+        <Route
+          path={AppRoute.Offer}
+          element={<OfferPage />}
+        />
         <Route
           path="*"
           element={<NotFoundPage />}
