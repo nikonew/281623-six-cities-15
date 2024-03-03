@@ -6,19 +6,22 @@ import OfferPage from '../../pages/offer-page/offer-page';
 import FavoritePage from '../../pages/favorite-page/favorite-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import PrivateRoute from '../router/private-route';
+import { TOffer } from '../../componets/offer-card/types';
 
 
 type AppScreenProps = {
-  cardCount: number;
+  offers: TOffer[];
+  authorizationStatus: AuthorizationStatus;
 }
 
-export default function App({cardCount}: AppScreenProps): JSX.Element {
+export default function App({offers, authorizationStatus}: AppScreenProps): JSX.Element {
+
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={AppRoute.Main}
-          element={<MainPage cardCount={cardCount} />}
+          element={<MainPage offers={offers} authorizationStatus={authorizationStatus}/>}
         />
         <Route
           path={AppRoute.Login}
@@ -46,3 +49,4 @@ export default function App({cardCount}: AppScreenProps): JSX.Element {
     </BrowserRouter>
   );
 }
+

@@ -1,0 +1,71 @@
+import { TOffer } from '../componets/offer-card/types';
+
+
+const CITIES: (string)[] = ['Amsterdam', 'Chamonix', 'Geneva', 'Rome', 'New York'];
+
+const DESCRIPTIONS: (string)[] = [
+  'Lorem ipsum dolor sit amet',
+  'Fusce tristique felis at fermentum pharetra',
+  'Aliquam id orci ut lectus varius viverra',
+  'Nullam nunc ex, convallis sed finibus eget, sollicitudin eget ante',
+  'Phasellus eros mauris, condimentum sed nibh vitae, sodales efficitur ipsum',
+  'Sed blandit, eros vel aliquam faucibus, purus ex euismod diam, eu luctus nunc ante ut dui',
+  'Sed sed nisi sed augue convallis suscipit in sed felis',
+];
+
+const OFFER_COUNT = 5;
+
+const getRandomNumber = (min: number, max: number) => {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+
+
+export const getRandomArrayElement = <T> (array: T[]) => array[Math.floor(Math.random() * array.length)];
+
+
+export const createOffer: TOffer[] = [
+  {
+    id: '6af6f711-c28d-4121-82cd-e0b462a27f00',
+    title: 'Beautiful & luxurious studio at great location',
+    type: 'apartment',
+    price: getRandomNumber(100,10000),
+    city: {
+      name: getRandomArrayElement(CITIES),
+      location: {
+        latitude: 52.35514938496378,
+        longitude: 4.673877537499948,
+        zoom: 8
+      }},
+    location: {
+      latitude: 52.35514938496378,
+      longitude: 4.673877537499948,
+      zoom: 8
+    },
+    isFavorite: false,
+    isPremium: false,
+    rating: getRandomNumber(0, 4),
+    description: getRandomArrayElement(DESCRIPTIONS),
+    bedrooms: getRandomNumber(0, 4),
+    goods: [
+      'Heating'
+    ],
+    host: {
+      'name': 'Oliver Conner',
+      'avatarUrl': 'https://url-to-image/image.png',
+      'isPro': false
+    },
+    images: [
+      'https://url-to-image/image.png'
+    ],
+    maxAdults: getRandomNumber(0, 4)
+  }];
+
+let id = 0;
+
+const generateOffer = () => ({...getRandomArrayElement(createOffer),id: id++});
+
+export const offers = Array.from({length: OFFER_COUNT}, generateOffer);
+
+
