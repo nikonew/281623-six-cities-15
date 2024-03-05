@@ -25,7 +25,7 @@ const getRandomNumber = (min: number, max: number) => {
 export const getRandomArrayElement = <T> (array: T[]) => array[Math.floor(Math.random() * array.length)];
 
 
-export const createOffer: TOffer[] = [
+export const createOffer: TOffer =
   {
     id: '6af6f711-c28d-4121-82cd-e0b462a27f00',
     title: 'Beautiful & luxurious studio at great location',
@@ -60,11 +60,11 @@ export const createOffer: TOffer[] = [
       'https://url-to-image/image.png'
     ],
     maxAdults: getRandomNumber(0, 4)
-  }];
+  };
 
 let id = 0;
 
-const generateOffer = () => ({...getRandomArrayElement(createOffer),id: id++});
+const generateOffer: () => TOffer = () => ({...createOffer,id: String(id++)});
 
 export const offers = Array.from({length: OFFER_COUNT}, generateOffer);
 

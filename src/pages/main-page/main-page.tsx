@@ -111,7 +111,7 @@ export default function MainPage ({offers}: MainPageProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <OfferCard offers = {offers}/>
+                {offers.length > 0 && offers.map((offer) => (<OfferCard key={offer.id} offer = {offer}/>))}
               </div>
             </section>
             <div className="cities__right-section">

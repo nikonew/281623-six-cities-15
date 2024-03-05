@@ -16,7 +16,7 @@ export type THost = {
 }
 
 export type TOffer = {
-    id: number | string;
+    id: string;
     title: string;
     type: string;
     price: number;
