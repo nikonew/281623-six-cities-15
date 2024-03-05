@@ -11,17 +11,16 @@ import { TOffer } from '../../componets/offer-card/types';
 
 type AppScreenProps = {
   offers: TOffer[];
-  authorizationStatus: AuthorizationStatus;
 }
 
-export default function App({offers, authorizationStatus}: AppScreenProps): JSX.Element {
+export default function App({offers}: AppScreenProps): JSX.Element {
 
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={AppRoute.Main}
-          element={<MainPage offers={offers} authorizationStatus={authorizationStatus}/>}
+          element={<MainPage offers={offers}/>}
         />
         <Route
           path={AppRoute.Login}

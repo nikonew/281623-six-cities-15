@@ -1,4 +1,11 @@
-export default function OfferCard (): JSX.Element {
+import { TOffer } from './types';
+
+type OfferCardProps = {
+  offers: TOffer[];
+}
+
+export default function OfferCard ({offers}: OfferCardProps): JSX.Element {
+
   return (
     <article className="cities__card place-card">
       <div className="cities__image-wrapper place-card__image-wrapper">
@@ -15,7 +22,7 @@ export default function OfferCard (): JSX.Element {
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
-            <b className="place-card__price-value">€80</b>
+            <b className="place-card__price-value">{price}</b>
             <span className="place-card__price-text">
               /&nbsp;night
             </span>
