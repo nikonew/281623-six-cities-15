@@ -1,11 +1,12 @@
 import { TComment } from '../offer-card/types';
 
 type ReviewsListProps = {
-  comments: TComment[];
+  comment: TComment;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export default function ReviewsList ({comments}: ReviewsListProps): JSX.Element {
+export default function ReviewsList ({comment}: ReviewsListProps): JSX.Element {
+
+  const {user} = comment;
 
   return (
     <ul className="reviews__list">
@@ -14,13 +15,13 @@ export default function ReviewsList ({comments}: ReviewsListProps): JSX.Element 
           <div className="reviews__avatar-wrapper user__avatar-wrapper">
             <img
               className="reviews__avatar user__avatar"
-              src="img/avatar-max.jpg"
+              src={user.avatarUrl}
               width={54}
               height={54}
               alt="Reviews avatar"
             />
           </div>
-          <span className="reviews__user-name">Max</span>
+          <span className="reviews__user-name">{user.name}</span>
         </div>
         <div className="reviews__info">
           <div className="reviews__rating rating">
@@ -30,9 +31,7 @@ export default function ReviewsList ({comments}: ReviewsListProps): JSX.Element 
             </div>
           </div>
           <p className="reviews__text">
-          A quiet cozy and picturesque that hides behind a a river by
-          the unique lightness of Amsterdam. The building is green and
-          from 18th century.
+            {comment.comment}
           </p>
           <time className="reviews__time" dateTime="2019-04-24">
           April 2019

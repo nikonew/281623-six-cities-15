@@ -32,9 +32,9 @@ export default function App({offers,comments, authorizationStatus}: AppScreenPro
           path={AppRoute.Favorites}
           element={
             <PrivateRoute
-              authorizationStatus={AuthorizationStatus.NoAuth}
+              authorizationStatus={AuthorizationStatus.Auth}
             >
-              <FavoritePage />
+              <FavoritePage offers={offers}/>
             </PrivateRoute>
           }
         />
