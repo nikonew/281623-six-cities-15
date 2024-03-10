@@ -63,6 +63,7 @@ export default function OfferPage ({offers,comments, authorizationStatus}: Offer
               {
                 images.map((src, index) => (
 
+                  // eslint-disable-next-line react/no-array-index-key
                   <div className="offer__image-wrapper" key={index}>
                     <img
                       className="offer__image"
