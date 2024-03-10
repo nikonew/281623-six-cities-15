@@ -52,12 +52,14 @@ export const createOffer: TOffer =
       'Heating'
     ],
     host: {
-      'name': 'Oliver Conner',
-      'avatarUrl': 'https://url-to-image/image.png',
-      'isPro': false
+      name: 'Oliver Conner',
+      avatarUrl: '../img/avatar-max.jpg',
+      isPro: false
     },
     images: [
-      'https://url-to-image/image.png'
+      '../img/apartment-01.jpg',
+      '../img/apartment-02.jpg',
+      '../img/apartment-03.jpg'
     ],
     maxAdults: getRandomNumber(0, 4)
   };

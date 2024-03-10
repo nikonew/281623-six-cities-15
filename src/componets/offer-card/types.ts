@@ -33,3 +33,10 @@ export type TOffer = {
     maxAdults: number;
 }
 
+export type TComment = {
+    id: string;
+    date: Date;
+    user: THost;
+    comment: string;
+    rating: number;
+}

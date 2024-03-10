@@ -1,6 +1,8 @@
+import { useEffect, useState } from 'react';
 import Logo from '../../componets/logo/logo';
 import OfferCard from '../../componets/offer-card/offer-card';
 import { TOffer } from '../../componets/offer-card/types';
+import { Nullable } from 'vitest';
 //import MainEmptyPage from '../main-empty-page/main-empty-page';
 
 type MainPageProps = {
@@ -8,7 +10,17 @@ type MainPageProps = {
 }
 
 export default function MainPage ({offers}: MainPageProps): JSX.Element {
+  const [activeOffer, setActiveOffer] = useState<Nullable<TOffer>>(null);
+  const handleHover = (offer?: TOffer) => {
+    setActiveOffer(offer || null);
+  };
+  useEffect(() =>{
+    console.warn(activeOffer);
 
+    return () => {
+      console.log('component will unmount');
+    };
+  },[]);
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -111,7 +123,14 @@ export default function MainPage ({offers}: MainPageProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                {offers.length > 0 && offers.map((offer) => (<OfferCard key={offer.id} offer = {offer}/>))}
+                {
+                  offers.length > 0 && offers.map((offer) => (
+                    <OfferCard
+                      key={offer.id}
+                      offer = {offer}
+                      handleHover={handleHover}
+                    />))
+                }
               </div>
             </section>
             <div className="cities__right-section">
