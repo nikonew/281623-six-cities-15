@@ -14,13 +14,12 @@ export default function MainPage ({offers}: MainPageProps): JSX.Element {
   const handleHover = (offer?: TOffer) => {
     setActiveOffer(offer || null);
   };
-  useEffect(() =>{
-    console.warn(activeOffer);
 
-    return () => {
-      console.log('component will unmount');
-    };
-  },[]);
+  useEffect(() => {
+    // eslint-disable-next-line no-console
+    console.warn(activeOffer);
+  });
+
   return (
     <div className="page page--gray page--main">
       <header className="header">
