@@ -1,7 +1,7 @@
 import { TComment } from '../offer-card/types';
 
 type ReviewsListProps = {
-  comments: TComment;
+  comments: TComment[];
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
