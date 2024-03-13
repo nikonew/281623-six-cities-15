@@ -6,19 +6,23 @@ import OfferPage from '../../pages/offer-page/offer-page';
 import FavoritePage from '../../pages/favorite-page/favorite-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import PrivateRoute from '../router/private-route';
+import { TComment, TOffer } from '../../componets/offer-card/types';
 
 
 type AppScreenProps = {
-  cardCount: number;
+  offers: TOffer[];
+  comments: TComment[];
+  authorizationStatus: AuthorizationStatus;
 }
 
-export default function App({cardCount}: AppScreenProps): JSX.Element {
+export default function App({offers,comments, authorizationStatus}: AppScreenProps): JSX.Element {
+
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={AppRoute.Main}
-          element={<MainPage cardCount={cardCount} />}
+          element={<MainPage offers={offers}/>}
         />
         <Route
           path={AppRoute.Login}
@@ -28,15 +32,15 @@ export default function App({cardCount}: AppScreenProps): JSX.Element {
           path={AppRoute.Favorites}
           element={
             <PrivateRoute
-              authorizationStatus={AuthorizationStatus.NoAuth}
+              authorizationStatus={AuthorizationStatus.Auth}
             >
-              <FavoritePage />
+              <FavoritePage offers={offers}/>
             </PrivateRoute>
           }
         />
         <Route
-          path={AppRoute.Offer}
-          element={<OfferPage />}
+          path={`${AppRoute.Offer}/:id`}
+          element={<OfferPage offers={offers} comments={comments} authorizationStatus= {authorizationStatus}/>}
         />
         <Route
           path="*"
@@ -46,3 +50,4 @@ export default function App({cardCount}: AppScreenProps): JSX.Element {
     </BrowserRouter>
   );
 }
+
