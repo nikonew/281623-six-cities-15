@@ -130,13 +130,11 @@ export default function MainPage ({offers}: MainPageProps): JSX.Element {
               </div>
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map">
-                <Map
-                  city={city}
-                  offers={offers}
-                  activeOffer={activeOffer}
-                />
-              </section>
+              <Map
+                city={city}
+                offers={offers}
+                activeOffer={activeOffer}
+              />
             </div>
           </div>
         </div>
