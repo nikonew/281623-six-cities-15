@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import Logo from '../../componets/logo/logo';
 
 export default function LoginPage (): JSX.Element {
@@ -44,9 +45,9 @@ export default function LoginPage (): JSX.Element {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <a className="locations__item-link" href="#">
+              <Link className="locations__item-link" to="/">
                 <span>Amsterdam</span>
-              </a>
+              </Link>
             </div>
           </section>
         </div>

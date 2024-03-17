@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import Logo from '../../componets/logo/logo';
 
 export default function FavoriteEmptyPage (): JSX.Element {
@@ -12,21 +13,20 @@ export default function FavoriteEmptyPage (): JSX.Element {
             <nav className="header__nav">
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
-                  <a
+                  <span
                     className="header__nav-link header__nav-link--profile"
-                    href="#"
                   >
                     <div className="header__avatar-wrapper user__avatar-wrapper"></div>
                     <span className="header__user-name user__name">
                   Oliver.conner@gmail.com
                     </span>
                     <span className="header__favorite-count">0</span>
-                  </a>
+                  </span>
                 </li>
                 <li className="header__nav-item">
-                  <a className="header__nav-link" href="#">
+                  <span className="header__nav-link">
                     <span className="header__signout">Sign out</span>
-                  </a>
+                  </span>
                 </li>
               </ul>
             </nav>
@@ -47,7 +47,7 @@ export default function FavoriteEmptyPage (): JSX.Element {
         </div>
       </main>
       <footer className="footer">
-        <a className="footer__logo-link" href="main.html">
+        <Link className="footer__logo-link" to="/">
           <img
             className="footer__logo"
             src="img/logo.svg"
@@ -55,7 +55,7 @@ export default function FavoriteEmptyPage (): JSX.Element {
             width={64}
             height={33}
           />
-        </a>
+        </Link>
       </footer>
     </div>
   );

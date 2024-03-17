@@ -65,7 +65,7 @@ export default function OfferCard ({offer, handleHover}: OfferCardProps): JSX.El
             </div>
           </div>
           <h2 className="place-card__name">
-            <a href="#">Wood and stone place</a>
+            Wood and stone place
           </h2>
           <p className="place-card__type">{type}</p>
         </div>

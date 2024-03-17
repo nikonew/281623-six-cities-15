@@ -155,12 +155,12 @@ export default function OfferPage ({offers,comments, authorizationStatus}: Offer
                 </div>
               </div>
               <section className="offer__reviews reviews">
-                {Array.from({length: comments.length}, (_,index) => (
+                {
                   <Reviews
-                    key={comments[index].id}
                     comments={comments}
                     isAuth = {authorizationStatus === AuthorizationStatus.Auth}
-                  />))}
+                  />
+                }
               </section>
             </div>
           </div>
