@@ -10,9 +10,10 @@ type ReviewsProps = {
 export default function Reviews ({comments, isAuth}: ReviewsProps): JSX.Element {
   return (
     <>
-      {comments.map((comment)=> (<ReviewsList key={comment.id} comment={comment}/>))}
-      {isAuth && <ReviewsForm/>}
+      {!comments.length && <p>Комментарии отсутствую</p>}
+      {comments.length && comments.map((comment)=> (<ReviewsList key={comment.id} comment={comment}/>))}
       {!isAuth && <p>Только боги могут оставлять комментарии</p>}
+      {isAuth && <ReviewsForm/>}
     </>
   );
 }
