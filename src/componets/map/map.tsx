@@ -39,5 +39,5 @@ export default function Map ({city, offers, activeOffer}: MapProps): JSX.Element
     }
   }, [activeOffer, map,offers]);
 
-  return <div style={{height: '770px'}} ref={mapContainerRef}></div>;
+  return <section className="cities__map map" ref={mapContainerRef} />;
 }
