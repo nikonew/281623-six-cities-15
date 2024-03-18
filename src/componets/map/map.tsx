@@ -4,14 +4,16 @@ import leaflet, { LayerGroup } from 'leaflet';
 import { TCity, TOffer } from '../offer-card/types';
 import { ACTIVE_MARKER_ICON, DEFAULT_MARKER_ICON} from './const';
 import { Nullable } from 'vitest';
+import 'leaflet/dist/leaflet.css';
 
 type MapProps = {
     city: TCity;
     offers: TOffer[];
     activeOffer: Nullable<TOffer>;
+    className: string;
 }
 
-export default function Map ({city, offers, activeOffer}: MapProps): JSX.Element {
+export default function Map ({city, offers, activeOffer, className}: MapProps): JSX.Element {
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const map = useMap({location: city.location, mapRef: mapContainerRef});
   const markerLayer = useRef<LayerGroup>(leaflet.layerGroup());
@@ -39,5 +41,5 @@ export default function Map ({city, offers, activeOffer}: MapProps): JSX.Element
     }
   }, [activeOffer, map,offers]);
 
-  return <section className="cities__map map" ref={mapContainerRef} />;
+  return (<section className={`${className} map`} ref={mapContainerRef}></section>);
 }

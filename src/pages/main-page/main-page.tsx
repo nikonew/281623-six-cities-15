@@ -4,7 +4,9 @@ import OfferCard from '../../componets/offer-card/offer-card';
 import { TOffer } from '../../componets/offer-card/types';
 import { Nullable } from 'vitest';
 import Map from '../../componets/map/map';
-import { city } from '../../mocks/mock-city-map';
+import { cityOffer } from '../../mocks/mock-city-map';
+import { CITIES } from '../../mocks/mock';
+import LocationsItem from '../../componets/locations-item/locations-item';
 
 type MainPageProps = {
     offers: TOffer[];
@@ -54,36 +56,7 @@ export default function MainPage ({offers}: MainPageProps): JSX.Element {
         <div className="tabs">
           <section className="locations container">
             <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Paris</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Cologne</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Brussels</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item tabs__item--active">
-                  <span>Amsterdam</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Hamburg</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Dusseldorf</span>
-                </a>
-              </li>
+              {CITIES.map((city) => <LocationsItem city={city} key={city}/>)}
             </ul>
           </section>
         </div>
@@ -131,7 +104,8 @@ export default function MainPage ({offers}: MainPageProps): JSX.Element {
             </section>
             <div className="cities__right-section">
               <Map
-                city={city}
+                className='cities__map'
+                city={cityOffer}
                 offers={offers}
                 activeOffer={activeOffer}
               />

@@ -4,7 +4,7 @@ import { TComment, TOffer } from '../../componets/offer-card/types';
 import NotFoundPage from '../not-found-page/not-found-page';
 import Reviews from '../../componets/reviews/review';
 import { AuthorizationStatus } from '../../app/router/router/router';
-
+import Map from '../../componets/map/map';
 
 type OfferPageProps = {
   offers: TOffer[];
@@ -17,11 +17,12 @@ export default function OfferPage ({offers,comments, authorizationStatus}: Offer
   const {id} = useParams();
   const offerId = offers.find((offer) => offer.id === id);
 
+
   if (!offerId) {
     return <NotFoundPage/>;
   }
 
-  const {images, rating, type, bedrooms, price, maxAdults, title} = offerId;
+  const {images, rating, type, bedrooms, price, maxAdults, title, city} = offerId;
   const {name, avatarUrl, isPro} = offerId.host;
 
   return (
@@ -164,7 +165,12 @@ export default function OfferPage ({offers,comments, authorizationStatus}: Offer
               </section>
             </div>
           </div>
-          <section className="offer__map map" />
+          <Map
+            className='offer__map'
+            city={city}
+            offers={offers}
+            activeOffer={offerId}
+          />
         </section>
         <div className="container">
           <section className="near-places places">

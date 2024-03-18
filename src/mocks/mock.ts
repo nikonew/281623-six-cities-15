@@ -1,7 +1,7 @@
 import { TOffer } from '../componets/offer-card/types';
 
 
-const CITIES: (string)[] = ['Amsterdam', 'Chamonix', 'Geneva', 'Rome', 'New York'];
+export const CITIES: (string)[] = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
 
 const DESCRIPTIONS: (string)[] = [
   'Lorem ipsum dolor sit amet',
