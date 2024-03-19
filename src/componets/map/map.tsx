@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import useMap from '../../hooks/use-map';
 import leaflet, { LayerGroup } from 'leaflet';
-import { TCity, TOffer } from '../offer-card/types';
+import { TCity, TOffer } from '../../types/types';
 import { ACTIVE_MARKER_ICON, DEFAULT_MARKER_ICON} from './const';
 import { Nullable } from 'vitest';
 import 'leaflet/dist/leaflet.css';

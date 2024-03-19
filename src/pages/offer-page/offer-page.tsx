@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import Logo from '../../componets/logo/logo';
-import { TComment, TOffer } from '../../componets/offer-card/types';
+import { TComment, TOffer } from '../../types/types';
 import NotFoundPage from '../not-found-page/not-found-page';
 import Reviews from '../../componets/reviews/review';
 import { AuthorizationStatus } from '../../app/router/router/router';

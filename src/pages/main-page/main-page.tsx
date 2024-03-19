@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Logo from '../../componets/logo/logo';
 import OfferCard from '../../componets/offer-card/offer-card';
-import { TOffer } from '../../componets/offer-card/types';
+import { TOffer } from '../../types/types';
 import { Nullable } from 'vitest';
 import Map from '../../componets/map/map';
 import { cityOffer } from '../../mocks/mock-city-map';

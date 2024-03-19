@@ -4,6 +4,8 @@ import App from './app/app/app';
 import { offers } from './mocks/mock';
 import { comments } from './mocks/mock-comments';
 import { AuthorizationStatus } from './app/router/router/router';
+import { Provider } from 'react-redux';
+import { store } from './store/store';
 
 const authorizationStatus = AuthorizationStatus.Auth;
 
@@ -13,6 +15,8 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <App offers = {offers} comments={comments} authorizationStatus= {authorizationStatus}/>
+    <Provider store={store}>
+      <App offers = {offers} comments={comments} authorizationStatus= {authorizationStatus}/>
+    </Provider>
   </React.StrictMode>
 );

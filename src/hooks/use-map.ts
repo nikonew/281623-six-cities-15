@@ -1,7 +1,7 @@
 import leaflet from 'leaflet';
 import { MutableRefObject, useEffect, useRef, useState } from 'react';
 import {Map} from 'leaflet';
-import { TLocation } from '../componets/offer-card/types';
+import { TLocation } from '../types/types';
 
 type TUseMap = {
     location: TLocation;

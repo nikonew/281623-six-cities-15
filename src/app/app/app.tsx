@@ -6,7 +6,7 @@ import OfferPage from '../../pages/offer-page/offer-page';
 import FavoritePage from '../../pages/favorite-page/favorite-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import PrivateRoute from '../router/private-route';
-import { TComment, TOffer } from '../../componets/offer-card/types';
+import { TComment, TOffer } from '../../types/types';
 
 
 type AppScreenProps = {
