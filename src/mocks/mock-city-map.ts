@@ -1,6 +1,6 @@
 import { TCity } from '../componets/offer-card/types';
 
-export const city: TCity = {
+export const cityOffer: TCity = {
   'name': 'Amsterdam',
   'location': {
     'latitude': 52.370216,
