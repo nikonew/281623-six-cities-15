@@ -4,19 +4,28 @@ import OfferCard from '../../componets/offer-card/offer-card';
 import { TOffer } from '../../types/types';
 import { Nullable } from 'vitest';
 import Map from '../../componets/map/map';
-import { cityOffer } from '../../mocks/mock-city-map';
-import { CITIES } from '../../mocks/mock';
-import LocationsItem from '../../componets/locations-item/locations-item';
+import { useAppDispatch, useAppSelector } from '../../hooks/store';
+import { CITIES_LOCATION } from '../../const';
+import { Link } from 'react-router-dom';
+import classNames from 'classnames';
+import { AppRoute } from '../../app/router/router/router';
+import { offersActions } from '../../store/reducers/reducer';
+import { selectCity, selectOffers } from '../../store/selectors/offers';
 
-type MainPageProps = {
-    offers: TOffer[];
-}
 
-export default function MainPage ({offers}: MainPageProps): JSX.Element {
+export default function MainPage (): JSX.Element {
   const [activeOffer, setActiveOffer] = useState<Nullable<TOffer>>(null);
   const handleHover = (offer?: TOffer) => {
     setActiveOffer(offer || null);
   };
+
+  const offers = useAppSelector(selectOffers);
+  const currentCity = useAppSelector(selectCity);
+
+
+  const dispatch = useAppDispatch();
+
+  const currentOffers = offers.filter((offer) => offer.city.name === currentCity);
 
 
   return (
@@ -56,7 +65,21 @@ export default function MainPage ({offers}: MainPageProps): JSX.Element {
         <div className="tabs">
           <section className="locations container">
             <ul className="locations__list tabs__list">
-              {CITIES.map((city) => <LocationsItem city={city} key={city}/>)}
+              {CITIES_LOCATION.map((city) => (
+                <li className="locations__item" key={city.name}>
+                  <Link
+                    className={classNames('locations__item-link', 'tabs__item',{'tabs__item--active':
+                currentCity === city.name})}
+                    onClick={(evt) => {
+                      evt.preventDefault();
+                      dispatch(offersActions.setCity(city.name));
+                    }}
+                    to={AppRoute.Main}
+                  >
+                    <span>{city.name}</span>
+                  </Link>
+                </li>
+              ))}
             </ul>
           </section>
         </div>
@@ -105,7 +128,7 @@ export default function MainPage ({offers}: MainPageProps): JSX.Element {
             <div className="cities__right-section">
               <Map
                 className='cities__map'
-                city={cityOffer}
+                currentCity={currentCity}
                 offers={offers}
                 activeOffer={activeOffer}
               />

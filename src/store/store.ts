@@ -1,6 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { reducer } from './reducers/reducer';
+import { offersSlice } from './reducers/reducer';
 
 export const store = configureStore({
-  reducer: reducer
+  reducer: {
+    [offersSlice.name]: offersSlice.reducer
+  }
 });

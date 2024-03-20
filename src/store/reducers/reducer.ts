@@ -1,6 +1,7 @@
 import { TOffer } from '../../types/types';
 import { CITIES_LOCATION, CityName } from '../../const';
 import { offers } from '../../mocks/mock';
+import { PayloadAction,createSlice } from '@reduxjs/toolkit';
 
 
 type OffersState = {
@@ -13,24 +14,20 @@ const initialState: OffersState = {
   offers,
 };
 
-const enum ActionType {
-    SetCity = 'offers/setCity'
-}
 
-export const setCity = (city: CityName) => ({
-  payload: city,
-  type: ActionType.SetCity,
+export const offersSlice = createSlice({
+  initialState,
+  name: 'offers',
+  reducers: {
+    setCity: (state, action: PayloadAction<CityName>) => {
+      state.city = action.payload;
+    },
+  },
+  selectors: {
+    city: (state: OffersState) => state.city,
+    offers: (state: OffersState) => state.offers,
+  }
 });
 
-export function reducer(state: OffersState = initialState, action: {payload: unknown; type: ActionType}):
-OffersState {
-  switch (action.type) {
-    case ActionType.SetCity:
-      return {
-        ...state,
-        city: action.payload as CityName,
-      };
-    default:
-      return state;
-  }
-}
+export const offersActions = offersSlice.actions;
+export const offersSelectors = offersSlice.selectors;
