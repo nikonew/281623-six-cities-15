@@ -5,7 +5,7 @@ import Reviews from '../../componets/reviews/review';
 import { AuthorizationStatus } from '../../app/router/router/router';
 import Map from '../../componets/map/map';
 import { useAppSelector } from '../../hooks/store';
-import { offersSelectors } from '../../store/reducers/reducer';
+import { offersSelectors } from '../../store/slices/slice';
 import { TComment } from '../../types/types';
 
 type OfferPageProps = {
