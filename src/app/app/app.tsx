@@ -40,7 +40,7 @@ export default function App({offers,comments, authorizationStatus}: AppScreenPro
         />
         <Route
           path={`${AppRoute.Offer}/:id`}
-          element={<OfferPage offers={offers} comments={comments} authorizationStatus= {authorizationStatus}/>}
+          element={<OfferPage comments={comments} authorizationStatus= {authorizationStatus}/>}
         />
         <Route
           path="*"

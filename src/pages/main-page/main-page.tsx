@@ -3,30 +3,30 @@ import Logo from '../../componets/logo/logo';
 import OfferCard from '../../componets/offer-card/offer-card';
 import { TOffer } from '../../types/types';
 import { Nullable } from 'vitest';
-import Map from '../../componets/map/map';
+//import Map from '../../componets/map/map';
 import { useAppDispatch, useAppSelector } from '../../hooks/store';
 import { CITIES_LOCATION } from '../../const';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import { AppRoute } from '../../app/router/router/router';
-import { offersActions } from '../../store/reducers/reducer';
-import { selectCity, selectOffers } from '../../store/selectors/offers';
+import { offersActions, offersSelectors } from '../../store/reducers/reducer';
 
 
 export default function MainPage (): JSX.Element {
-  const [activeOffer, setActiveOffer] = useState<Nullable<TOffer>>(null);
+  const [/*activeOffer*/, setActiveOffer] = useState<Nullable<TOffer>>(null);
   const handleHover = (offer?: TOffer) => {
     setActiveOffer(offer || null);
   };
 
-  const offers = useAppSelector(selectOffers);
-  const currentCity = useAppSelector(selectCity);
+  const offers = useAppSelector(offersSelectors.offers);
+  const currentCity = useAppSelector(offersSelectors.city);
 
 
   const dispatch = useAppDispatch();
 
   const currentOffers = offers.filter((offer) => offer.city.name === currentCity);
 
+  const isEmty = currentOffers.length === 0;
 
   return (
     <div className="page page--gray page--main">
@@ -60,7 +60,7 @@ export default function MainPage (): JSX.Element {
           </div>
         </div>
       </header>
-      <main className="page__main page__main--index">
+      <main className={classNames('page__main', 'page__main--index', {'page__main--index-empty': isEmty})}>
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
@@ -126,12 +126,12 @@ export default function MainPage (): JSX.Element {
               </div>
             </section>
             <div className="cities__right-section">
-              <Map
+              {/* <Map
                 className='cities__map'
                 currentCity={currentCity}
                 offers={offers}
                 activeOffer={activeOffer}
-              />
+              /> */}
             </div>
           </div>
         </div>

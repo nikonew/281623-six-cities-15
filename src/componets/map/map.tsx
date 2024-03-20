@@ -7,24 +7,25 @@ import { Nullable } from 'vitest';
 import 'leaflet/dist/leaflet.css';
 
 type MapProps = {
-  currentCity: TCity;
+    city: TCity;
     offers: TOffer[];
     activeOffer: Nullable<TOffer>;
     className: string;
 }
 
-export default function Map ({currentCity, offers, activeOffer, className}: MapProps): JSX.Element {
+export default function Map ({city, offers, activeOffer, className}: MapProps): JSX.Element {
   const mapContainerRef = useRef<HTMLDivElement>(null);
-  const map = useMap({location: currentCity.location, mapRef: mapContainerRef});
+  const map = useMap({location: city.location, mapRef: mapContainerRef});
   const markerLayer = useRef<LayerGroup>(leaflet.layerGroup());
+
 
   useEffect(()=> {
     if(map) {
-      map.setView([currentCity.location.latitude, currentCity.location.longitude], currentCity.location.zoom);
+      map.setView([city.location.latitude, city.location.longitude], city.location.zoom);
       markerLayer.current.addTo(map);
       markerLayer.current.clearLayers();
     }
-  }, [currentCity,map]);
+  }, [city,map]);
 
   useEffect(() => {
     if (map) {
