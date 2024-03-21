@@ -1,4 +1,4 @@
-import { TComment } from '../componets/offer-card/types';
+import { TComment } from '../types/types';
 
 const COMMENT_COUNT = 1;
 

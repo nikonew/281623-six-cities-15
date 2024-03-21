@@ -1,4 +1,4 @@
-import { TComment } from '../offer-card/types';
+import { TComment } from '../../types/types';
 
 type ReviewsListProps = {
   comment: TComment;

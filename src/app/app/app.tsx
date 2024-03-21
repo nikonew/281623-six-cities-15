@@ -6,7 +6,7 @@ import OfferPage from '../../pages/offer-page/offer-page';
 import FavoritePage from '../../pages/favorite-page/favorite-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import PrivateRoute from '../router/private-route';
-import { TComment, TOffer } from '../../componets/offer-card/types';
+import { TComment, TOffer } from '../../types/types';
 
 
 type AppScreenProps = {
@@ -22,7 +22,7 @@ export default function App({offers,comments, authorizationStatus}: AppScreenPro
       <Routes>
         <Route
           path={AppRoute.Main}
-          element={<MainPage offers={offers}/>}
+          element={<MainPage/>}
         />
         <Route
           path={AppRoute.Login}
@@ -40,7 +40,7 @@ export default function App({offers,comments, authorizationStatus}: AppScreenPro
         />
         <Route
           path={`${AppRoute.Offer}/:id`}
-          element={<OfferPage offers={offers} comments={comments} authorizationStatus= {authorizationStatus}/>}
+          element={<OfferPage comments={comments} authorizationStatus= {authorizationStatus}/>}
         />
         <Route
           path="*"

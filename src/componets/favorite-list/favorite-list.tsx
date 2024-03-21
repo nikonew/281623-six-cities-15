@@ -1,4 +1,4 @@
-import { TOffer } from '../offer-card/types';
+import { TOffer } from '../../types/types';
 
 type FavoriteListProps = {
     offer: TOffer;

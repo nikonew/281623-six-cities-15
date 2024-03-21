@@ -1,4 +1,4 @@
-import { TCity } from '../componets/offer-card/types';
+import { TCity } from '../types/types';
 
 export const cityOffer: TCity = {
   'name': 'Amsterdam',

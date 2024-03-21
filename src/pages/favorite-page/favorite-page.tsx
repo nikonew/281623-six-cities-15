@@ -1,5 +1,5 @@
 import Logo from '../../componets/logo/logo';
-import { TOffer } from '../../componets/offer-card/types';
+import { TOffer } from '../../types/types';
 import FavoriteList from '../../componets/favorite-list/favorite-list';
 
 type FavoritePageProps = {

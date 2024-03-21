@@ -1,22 +1,25 @@
 import { useParams } from 'react-router-dom';
 import Logo from '../../componets/logo/logo';
-import { TComment, TOffer } from '../../componets/offer-card/types';
 import NotFoundPage from '../not-found-page/not-found-page';
 import Reviews from '../../componets/reviews/review';
 import { AuthorizationStatus } from '../../app/router/router/router';
 import Map from '../../componets/map/map';
+import { useAppSelector } from '../../hooks/store';
+import { offersSelectors } from '../../store/slices/slice';
+import { TComment } from '../../types/types';
 
 type OfferPageProps = {
-  offers: TOffer[];
   comments: TComment[];
   authorizationStatus: AuthorizationStatus;
 }
 
-export default function OfferPage ({offers,comments, authorizationStatus}: OfferPageProps): JSX.Element {
+export default function OfferPage ({comments, authorizationStatus}: OfferPageProps): JSX.Element {
 
   const {id} = useParams();
-  const offerId = offers.find((offer) => offer.id === id);
+  const offers = useAppSelector(offersSelectors.offers);
 
+  const offerId = offers.find((offer) => offer.id === id);
+  //const currentCity = useAppSelector(offersSelectors.city);
 
   if (!offerId) {
     return <NotFoundPage/>;

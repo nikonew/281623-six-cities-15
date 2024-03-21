@@ -1,4 +1,4 @@
-import { TComment } from '../offer-card/types';
+import { TComment } from '../../types/types';
 import ReviewsForm from '../reviews-form/reviews-form';
 import ReviewsList from '../reviews-list/reviews-list';
 
