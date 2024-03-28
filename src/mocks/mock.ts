@@ -66,7 +66,12 @@ export const createOffer: TOffer =
 
 let id = 0;
 
-const generateOffer: () => TOffer = () => ({...createOffer,id: String(id++)});
+const generateOffer: () => TOffer = () => ({
+  ...createOffer,
+  id: String(id++),
+  price: getRandomNumber(10,100),
+  rating: getRandomNumber(3, 4),
+});
 
 export const offers = Array.from({length: OFFER_COUNT}, generateOffer);
 

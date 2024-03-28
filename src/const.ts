@@ -25,15 +25,18 @@ export const CITIES_LOCATION = [
   }
 ] as const;
 
-export const SORT_OPTIONS =
- ['Popular', 'Price: low to high', 'Price: high to low', 'Top rated first']satisfies Record<SortOption, string>;
-
-export enum SortOption {
-  Popular = 0,
-  PriceLowHigh = 1,
-  PriceHighLow = 2,
-  TopRated = 3
+export enum SortingTypes {
+  Popular = 'Popular',
+  PriceLowHigh = 'Price: low to high',
+  PriceHighLow = 'Price: high to low',
+  TopRated = 'Top rated first'
 }
 
+export const SORT_OPTIONS: Array<SortingTypes> = [
+  SortingTypes.Popular,
+  SortingTypes.PriceLowHigh,
+  SortingTypes.PriceHighLow,
+  SortingTypes.TopRated,
+];
 
 export const MAX_RATING = 5;

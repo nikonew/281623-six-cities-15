@@ -1,16 +1,17 @@
 import { TCity } from '../../types/types';
 
-type LocationCityProps = {
-    currentCity: TCity;
+type CityProps = {
+    city: TCity;
+    isActive?: string;
   }
 
-export default function LocationsCity ({currentCity}: LocationCityProps): JSX.Element {
+export default function City ({city,isActive}: CityProps): JSX.Element {
 
   return (
     <li className="locations__item">
-      <a className="locations__item-link tabs__item" href="#">
-        <span>{currentCity.name}</span>
-      </a>
+      <span className={`locations__item-link tabs__item${isActive === city.name ? ' tabs__item--active' : ''}`}>
+        <span>{city.name}</span>
+      </span>
     </li>
   );
 }

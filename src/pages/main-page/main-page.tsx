@@ -5,16 +5,17 @@ import {TOffer } from '../../types/types';
 import { Nullable } from 'vitest';
 import Map from '../../componets/map/map';
 import {useAppSelector } from '../../hooks/store';
-import { CITIES_LOCATION, SortOption} from '../../const';
+import { CITIES_LOCATION, SortingTypes} from '../../const';
 import classNames from 'classnames';
 import { offersSelectors } from '../../store/slices/slice';
 import Sort from '../../componets/sort/sort-main';
-import LocationsCity from '../../componets/locations-city/locations-city';
+import City from '../../componets/locations-city/locations-city';
+import { sort } from '../../util';
 
 
 export default function MainPage (): JSX.Element {
   const [activeOffer, setActiveOffer] = useState<Nullable<TOffer>>(null);
-  const [activeSort, setActiveSort] = useState(SortOption.Popular);
+  const [currentSortingType, setСurrentSortingType] = useState(SortingTypes.Popular);
   const handleHover = (offer?: TOffer) => {
     setActiveOffer(offer || null);
   };
@@ -23,26 +24,9 @@ export default function MainPage (): JSX.Element {
   const currentCity = useAppSelector(offersSelectors.currentCity);
 
 
-  //const dispatch = useAppDispatch();
-
-
   const currentOffers = offers.filter((offer) => offer.city.name === currentCity.name);
 
   const isEmpty = currentOffers.length === 0;
-
-  let sortedOffers = currentOffers;
-
-  if (activeSort === SortOption.PriceLowHigh) {
-    sortedOffers = currentOffers.toSorted((a,b) => a.price - b.price);
-  }
-
-  if (activeSort === SortOption.PriceHighLow) {
-    sortedOffers = currentOffers.toSorted((a,b) => b.price - a.price);
-  }
-
-  if (activeSort === SortOption.TopRated) {
-    sortedOffers = currentOffers.toSorted((a,b) => b.rating - a.rating);
-  }
 
 
   return (
@@ -84,9 +68,9 @@ export default function MainPage (): JSX.Element {
             <ul className="locations__list tabs__list">
               {CITIES_LOCATION.map((city) =>
                 (
-                  <LocationsCity
+                  <City
                     key={city.name}
-                    currentCity= {currentCity}
+                    city= {city}
                   />
                 ))}
             </ul>
@@ -99,16 +83,15 @@ export default function MainPage (): JSX.Element {
               <b className="places__found">
                 {currentOffers.length} place{currentOffers.length > 1 && 's'} to stay in {currentCity.name}
               </b>
-              <Sort current={activeSort} setter={setActiveSort} />
+              <Sort current={currentSortingType} setter={setСurrentSortingType} />
               <div className="cities__places-list places__list tabs__content">
-                {
-                  sortedOffers.length > 0 && sortedOffers.map((offer) => (
-                    <OfferCard
-                      key={offer.id}
-                      offer = {offer}
-                      handleHover={handleHover}
-                    />))
-                }
+                {sort(offers, currentSortingType).map((offer) => (
+                  <OfferCard
+                    key={offer.id}
+                    offer={offer}
+                    handleHover={handleHover}
+                  />
+                ))}
               </div>
             </section>
             <div className="cities__right-section">

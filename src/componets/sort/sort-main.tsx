@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
-import { SORT_OPTIONS, SortOption } from '../../const';
+import { SORT_OPTIONS, SortingTypes } from '../../const';
 import { useBoolean } from '../../hooks/useBoolean';
 import classNames from 'classnames';
 
 type SortProps = {
-  current: SortOption;
-  setter: (option: SortOption) => void;
+  current: SortingTypes;
+  setter: React.Dispatch<React.SetStateAction<SortingTypes>>;
 }
 
 export default function Sort ({current, setter}: SortProps): JSX.Element {
@@ -28,32 +28,27 @@ export default function Sort ({current, setter}: SortProps): JSX.Element {
     }
   }, [isOn,off]);
 
-  const selectedOptions = SORT_OPTIONS[current];
-
   return (
     <form className="places__sorting" action="#" method="get" onClick={toggle}>
-      <span className="places__sorting-caption">Sort by</span>
+      <span className="places__sorting-caption">{'Sort by '}</span>
       <span className="places__sorting-type" tabIndex={0}>
-        {selectedOptions}
+        {current}
         <svg className="places__sorting-arrow" width={7} height={4}>
           <use xlinkHref="#icon-arrow-select" />
         </svg>
       </span>
       <ul
-        className={classNames('places__options', 'places__options--custom',
-          {'places__options--opened' : isOn,
-          })}
+        className={classNames('places__options', 'places__options--custom', { 'places__options--opened': isOn,
+        })}
       >
-        {SORT_OPTIONS.map((option, index) => (
+        {SORT_OPTIONS.map((type) => (
           <li
-            className={classNames('places__options', {
-              'places__option--active': selectedOptions === option,
-            })}
-            key={option}
-            onClick={() => setter(index)}
+            className={classNames('places__option', { 'places__option--active': current === type })}
+            key={type}
+            onClick={() => setter(type)}
             tabIndex={0}
           >
-            {option}
+            {type}
           </li>
         ))}
       </ul>
