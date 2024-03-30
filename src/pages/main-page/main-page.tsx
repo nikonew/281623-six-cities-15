@@ -71,6 +71,7 @@ export default function MainPage (): JSX.Element {
                   <City
                     key={city.name}
                     city= {city}
+                    isActive={city.name === currentCity.name}
                   />
                 ))}
             </ul>
@@ -81,7 +82,7 @@ export default function MainPage (): JSX.Element {
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">
-                {currentOffers.length} place{currentOffers.length > 1 && 's'} to stay in {currentCity.name}
+                {offers.length} place{offers.length > 1 && 's'} to stay in {currentCity.name}
               </b>
               <Sort current={currentSortingType} setter={setСurrentSortingType} />
               <div className="cities__places-list places__list tabs__content">
