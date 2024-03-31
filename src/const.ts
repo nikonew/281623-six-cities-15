@@ -39,4 +39,10 @@ export const SORT_OPTIONS: Array<SortingTypes> = [
   SortingTypes.TopRated,
 ];
 
+export enum APIRoute {
+  Offers = '/offers',
+  Login = '/login',
+  Logout = '/logout'
+}
+
 export const MAX_RATING = 5;
