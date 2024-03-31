@@ -2,16 +2,19 @@ import { TCity, TOffer} from '../../types/types';
 import { CITIES_LOCATION} from '../../const';
 import { offers } from '../../mocks/mock';
 import { PayloadAction,createSlice } from '@reduxjs/toolkit';
+import { AuthorizationStatus } from '../../app/router/router/router';
 
 
 type OffersState = {
     currentCity: TCity;
     offers: TOffer[];
+    authorizationStatus: AuthorizationStatus;
 }
 
 const initialState: OffersState = {
   currentCity: CITIES_LOCATION[0],
   offers,
+  authorizationStatus: AuthorizationStatus.Unknown,
 };
 
 
@@ -21,6 +24,9 @@ export const offersSlice = createSlice({
   reducers: {
     setCurrentCity: (state, action: PayloadAction<TCity>) => {
       state.currentCity = action.payload;
+    },
+    requireAuthorization: (state, action: PayloadAction<AuthorizationStatus>) => {
+      state.authorizationStatus = action.payload;
     },
   },
   selectors: {
