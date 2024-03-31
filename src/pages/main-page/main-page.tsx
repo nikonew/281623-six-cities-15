@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import OfferCard from '../../componets/offer-card/offer-card';
-import {TOffer } from '../../types/types';
+import {TCity, TOffer } from '../../types/types';
 import { Nullable } from 'vitest';
 import Map from '../../componets/map/map';
-import {useAppSelector } from '../../hooks/store';
+import {useAppDispatch, useAppSelector } from '../../hooks/store';
 import { CITIES_LOCATION, SortingTypes} from '../../const';
 import classNames from 'classnames';
 import { offersSelectors } from '../../store/slices/slice';
@@ -11,6 +11,7 @@ import Sort from '../../componets/sort/sort-main';
 import City from '../../componets/locations-city/locations-city';
 import { sort } from '../../util';
 import Header from '../../componets/header/header';
+import { changeCity } from '../../store/action/action';
 
 
 export default function MainPage (): JSX.Element {
@@ -20,6 +21,8 @@ export default function MainPage (): JSX.Element {
     setActiveOffer(offer || null);
   };
 
+  const dispatch = useAppDispatch();
+
   const offers = useAppSelector(offersSelectors.offers);
   const currentCity = useAppSelector(offersSelectors.currentCity);
 
@@ -27,6 +30,10 @@ export default function MainPage (): JSX.Element {
   const currentOffers = offers.filter((offer) => offer.city.name === currentCity.name);
 
   const isEmpty = currentOffers.length === 0;
+
+  const handleCityChange = (city: TCity) => {
+    dispatch(changeCity(city));
+  };
 
 
   return (
@@ -43,6 +50,7 @@ export default function MainPage (): JSX.Element {
                     key={city.name}
                     city= {city}
                     isActive={city.name === currentCity.name}
+                    onClick={handleCityChange}
                   />
                 ))}
             </ul>

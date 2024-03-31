@@ -47,3 +47,4 @@ export type TSort = {
     HighToLow: string;
     TopRated: string;
 }
+
