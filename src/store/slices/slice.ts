@@ -4,6 +4,7 @@ import { offers } from '../../mocks/mock';
 import { PayloadAction,createSlice } from '@reduxjs/toolkit';
 import { AuthorizationStatus } from '../../app/router/router/router';
 import { requireAuthorization } from '../action/action';
+import { fetchAllOffers } from '../thunk/offers-api';
 
 
 type OffersState = {
@@ -24,6 +25,16 @@ export const offersSlice = createSlice({
     builder
       .addCase(requireAuthorization, (state, action) => {
         state.authorizationStatus = action.payload;
+      })
+      .addCase(fetchAllOffers.pending, (state) => {
+        state.authorizationStatus = AuthorizationStatus.NoAuth;
+      })
+      .addCase(fetchAllOffers.fulfilled, (state, action) => {
+        state.authorizationStatus = AuthorizationStatus.Auth;
+        state.offers = action.payload;
+      })
+      .addCase(fetchAllOffers.rejected, (state) => {
+        state.authorizationStatus = AuthorizationStatus.Unknown;
       }),
   initialState,
   name: 'offers',
