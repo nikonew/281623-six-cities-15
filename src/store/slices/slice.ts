@@ -3,6 +3,7 @@ import { CITIES_LOCATION} from '../../const';
 import { offers } from '../../mocks/mock';
 import { PayloadAction,createSlice } from '@reduxjs/toolkit';
 import { AuthorizationStatus } from '../../app/router/router/router';
+import { requireAuthorization } from '../action/action';
 
 
 type OffersState = {
@@ -19,14 +20,16 @@ const initialState: OffersState = {
 
 
 export const offersSlice = createSlice({
+  extraReducers: (builder) =>
+    builder
+      .addCase(requireAuthorization, (state, action) => {
+        state.authorizationStatus = action.payload;
+      }),
   initialState,
   name: 'offers',
   reducers: {
     setCurrentCity: (state, action: PayloadAction<TCity>) => {
       state.currentCity = action.payload;
-    },
-    requireAuthorization: (state, action: PayloadAction<AuthorizationStatus>) => {
-      state.authorizationStatus = action.payload;
     },
   },
   selectors: {
