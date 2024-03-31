@@ -40,3 +40,10 @@ export const SORT_OPTIONS: Array<SortingTypes> = [
 ];
 
 export const MAX_RATING = 5;
+
+export enum AppRoute {
+  Favorites = '/favorites',
+  Login = '/login',
+  Main = '/',
+  Offer = '/offer',
+}
