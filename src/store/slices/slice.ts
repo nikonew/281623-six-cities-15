@@ -50,5 +50,5 @@ export const offersSlice = createSlice({
   }
 });
 
-export const offersActions = offersSlice.actions;
+export const offersActions = {...offersSlice.actions, fetchAllOffers};
 export const offersSelectors = offersSlice.selectors;
