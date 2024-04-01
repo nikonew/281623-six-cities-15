@@ -7,6 +7,8 @@ import FavoritePage from '../../pages/favorite-page/favorite-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import PrivateRoute from '../router/private-route';
 import { TComment, TOffer } from '../../types/types';
+import { useAppSelector } from '../../hooks/store';
+import { offersSelectors } from '../../store/slices/slice';
 
 
 type AppScreenProps = {
@@ -17,6 +19,11 @@ type AppScreenProps = {
 
 export default function App({offers,comments, authorizationStatus}: AppScreenProps): JSX.Element {
 
+  const status = useAppSelector(offersSelectors.offersStatus);
+
+  if (status === AuthorizationStatus.Auth) {
+    return <div>Loading...</div>;
+  }
   return (
     <BrowserRouter>
       <Routes>

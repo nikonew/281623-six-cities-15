@@ -15,8 +15,10 @@ import { changeCity } from '../../store/action/action';
 
 
 export default function MainPage (): JSX.Element {
+
   const [activeOffer, setActiveOffer] = useState<Nullable<TOffer>>(null);
   const [currentSortingType, setСurrentSortingType] = useState(SortingTypes.Popular);
+
   const handleHover = (offer?: TOffer) => {
     setActiveOffer(offer || null);
   };
@@ -25,9 +27,8 @@ export default function MainPage (): JSX.Element {
 
   const offers = useAppSelector(offersSelectors.offers);
   const currentCity = useAppSelector(offersSelectors.currentCity);
-
-
   const currentOffers = offers.filter((offer) => offer.city.name === currentCity.name);
+
 
   const isEmpty = currentOffers.length === 0;
 
