@@ -10,6 +10,7 @@ import { TComment, TOffer } from '../../types/types';
 import { useActionCreators, useAppSelector } from '../../hooks/store';
 import { offersActions, offersSelectors } from '../../store/slices/slice';
 import { useEffect } from 'react';
+import { RequestStatus } from '../../const';
 
 
 type AppScreenProps = {
@@ -20,24 +21,24 @@ type AppScreenProps = {
 
 export default function App({offers,comments, authorizationStatus}: AppScreenProps): JSX.Element {
 
+  const status = useAppSelector(offersSelectors.offersStatus);
 
   const {fetchAllOffers} = useActionCreators(offersActions);
-
 
   useEffect(() => {
     fetchAllOffers()
       .unwrap()
-      .then(()=> {console.log('SACCES');
+      .then(()=> {
+        console.log('SACCES');
       })
-      .catch(() => {console.log('ERROR');
+      .catch(() => {
+        console.log('ERROR');
       });
   });
 
-  const status = useAppSelector(offersSelectors.offersStatus);
-
-  if (status === AuthorizationStatus.Auth) {
-    return <div>Loading...</div>;
-  }
+  // if (status === RequestStatus.Loading) {
+  //   return <div>Loading...</div>;
+  // }
   return (
     <BrowserRouter>
       <Routes>

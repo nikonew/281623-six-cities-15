@@ -46,3 +46,5 @@ export enum APIRoute {
 }
 
 export const MAX_RATING = 5;
+
+export const enum RequestStatus {Idle, Loading, Success, Failed}

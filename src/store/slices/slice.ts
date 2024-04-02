@@ -1,40 +1,34 @@
 import { TCity, TOffer} from '../../types/types';
-import { CITIES_LOCATION} from '../../const';
-import { offers } from '../../mocks/mock';
+import { CITIES_LOCATION, RequestStatus} from '../../const';
 import { PayloadAction,createSlice } from '@reduxjs/toolkit';
-import { AuthorizationStatus } from '../../app/router/router/router';
-import { requireAuthorization } from '../action/action';
 import { fetchAllOffers } from '../thunk/offers-api';
 
 
 type OffersState = {
     currentCity: TCity;
     offers: TOffer[];
-    authorizationStatus: AuthorizationStatus;
+    status: RequestStatus;
 }
 
 const initialState: OffersState = {
   currentCity: CITIES_LOCATION[0],
-  offers,
-  authorizationStatus: AuthorizationStatus.Unknown,
+  offers: [],
+  status: RequestStatus.Idle,
 };
 
 
 export const offersSlice = createSlice({
   extraReducers: (builder) =>
     builder
-      .addCase(requireAuthorization, (state, action) => {
-        state.authorizationStatus = action.payload;
-      })
       .addCase(fetchAllOffers.pending, (state) => {
-        state.authorizationStatus = AuthorizationStatus.NoAuth;
+        state.status = RequestStatus.Loading;
       })
       .addCase(fetchAllOffers.fulfilled, (state, action) => {
-        state.authorizationStatus = AuthorizationStatus.Auth;
+        state.status = RequestStatus.Success;
         state.offers = action.payload;
       })
       .addCase(fetchAllOffers.rejected, (state) => {
-        state.authorizationStatus = AuthorizationStatus.Unknown;
+        state.status = RequestStatus.Failed;
       }),
   initialState,
   name: 'offers',
@@ -46,7 +40,7 @@ export const offersSlice = createSlice({
   selectors: {
     currentCity: (state: OffersState) => state.currentCity,
     offers: (state: OffersState) => state.offers,
-    offersStatus: (state: OffersState) => state.authorizationStatus,
+    offersStatus: (state: OffersState) => state.status,
   }
 });
 
