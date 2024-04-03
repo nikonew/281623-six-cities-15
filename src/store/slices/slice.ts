@@ -44,5 +44,5 @@ export const offersSlice = createSlice({
   }
 });
 
-export const offersActions = {...offersSlice.actions, fetchAllOffers};
+export const { setCurrentCity } = offersSlice.actions;
 export const offersSelectors = offersSlice.selectors;

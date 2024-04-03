@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import OfferCard from '../../componets/offer-card/offer-card';
 import {TCity, TOffer } from '../../types/types';
 import { Nullable } from 'vitest';
@@ -6,12 +6,12 @@ import Map from '../../componets/map/map';
 import {useAppDispatch, useAppSelector } from '../../hooks/store';
 import { CITIES_LOCATION, SortingTypes} from '../../const';
 import classNames from 'classnames';
-import { offersSelectors } from '../../store/slices/slice';
+import { offersSelectors, setCurrentCity } from '../../store/slices/slice';
 import Sort from '../../componets/sort/sort-main';
-import City from '../../componets/locations-city/locations-city';
+import City from '../../componets/city/city';
 import { sort } from '../../util';
 import Header from '../../componets/header/header';
-import { changeCity } from '../../store/action/action';
+import { fetchAllOffers } from '../../store/thunk/offers-api';
 
 
 export default function MainPage (): JSX.Element {
@@ -33,9 +33,12 @@ export default function MainPage (): JSX.Element {
   const isEmpty = currentOffers.length === 0;
 
   const handleCityChange = (city: TCity) => {
-    dispatch(changeCity(city));
+    dispatch(setCurrentCity(city));
   };
 
+  useEffect (() => {
+    dispatch(fetchAllOffers());
+  });
 
   return (
     <div className="page page--gray page--main">
@@ -60,20 +63,25 @@ export default function MainPage (): JSX.Element {
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
-              <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">
-                {offers.length} place{offers.length > 1 && 's'} to stay in {currentCity.name}
-              </b>
-              <Sort current={currentSortingType} setter={setСurrentSortingType} />
-              <div className="cities__places-list places__list tabs__content">
-                {sort(offers, currentSortingType).map((offer) => (
-                  <OfferCard
-                    key={offer.id}
-                    offer={offer}
-                    handleHover={handleHover}
-                  />
-                ))}
-              </div>
+              {currentOffers.length > 0 && (
+                <>
+                  <h2 className="visually-hidden">Places</h2>
+                  <b className="places__found">
+                    {currentOffers.length} place{currentOffers.length > 1 && 's'} to stay in {currentCity.name}
+                  </b>
+                  <Sort current={currentSortingType} setter={setСurrentSortingType} />
+                  <div className="cities__places-list places__list tabs__content">
+                    {sort(currentOffers, currentSortingType).map((offer) => (
+                      <OfferCard
+                        key={offer.id}
+                        offer={offer}
+                        handleHover={handleHover}
+                      />
+                    ))}
+                  </div>
+                </>
+              )}
+              {!offers.length && <div>loading</div>}
             </section>
             <div className="cities__right-section">
               <Map
