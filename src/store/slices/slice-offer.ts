@@ -3,6 +3,7 @@ import { RequestStatus } from '../../const';
 import { FullOffer, TOffer } from '../../types/types';
 import { fetchNearBy, fetchOffer } from '../thunk/offers-api';
 
+
 type OfferState = {
     info: FullOffer[] | null;
     nearby: TOffer[];
@@ -46,3 +47,6 @@ export const offerSlice = createSlice({
     offerStatus: (state: OfferState) => state.status,
   }
 });
+
+export const offerAction = offerSlice.actions;
+export const offerSelector = offerSlice.selectors;
