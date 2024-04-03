@@ -6,7 +6,7 @@ import Map from '../../componets/map/map';
 import {useAppDispatch, useAppSelector } from '../../hooks/store';
 import { CITIES_LOCATION, SortingTypes} from '../../const';
 import classNames from 'classnames';
-import { offersSelectors, setCurrentCity } from '../../store/slices/slice';
+import { offersSelectors, setCurrentCity } from '../../store/slices/slice-offers';
 import Sort from '../../componets/sort/sort-main';
 import City from '../../componets/city/city';
 import { sort } from '../../util';
