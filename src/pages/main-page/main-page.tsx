@@ -12,6 +12,7 @@ import City from '../../componets/city/city';
 import { sort } from '../../util';
 import Header from '../../componets/header/header';
 import { fetchAllOffers } from '../../store/thunk/offers-api';
+import Spinner from '../../componets/spinner-coponent/spinner';
 
 
 export default function MainPage (): JSX.Element {
@@ -81,7 +82,7 @@ export default function MainPage (): JSX.Element {
                   </div>
                 </>
               )}
-              {!offers.length && <div>loading</div>}
+              {!offers.length && <Spinner/>}
             </section>
             <div className="cities__right-section">
               <Map
