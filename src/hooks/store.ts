@@ -1,6 +1,6 @@
 import { TypedUseSelectorHook, useDispatch, useSelector, useStore } from 'react-redux';
 import { AppDispatch, RootState } from '../types/store-types';
-import { store } from '../store/store';
+import { store } from '../store/';
 import { ActionCreator, ActionCreatorsMapObject, AsyncThunk, bindActionCreators } from '@reduxjs/toolkit';
 import { useMemo } from 'react';
 
@@ -10,9 +10,10 @@ export const useAppStore: () => typeof store = useStore;
 
 
 export const useActionCreators = <Actions extends ActionCreatorsMapObject>(actions: Actions): BoundActions<Actions> => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const dispatch = useAppDispatch();
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+  // eslint-disable-next-line react-hooks/exhaustive-deps, @typescript-eslint/no-unsafe-argument
   return useMemo(() => bindActionCreators(actions, dispatch), []);
 };
 

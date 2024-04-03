@@ -6,22 +6,21 @@ import OfferPage from '../../pages/offer-page/offer-page';
 import FavoritePage from '../../pages/favorite-page/favorite-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import PrivateRoute from '../router/private-route';
-import { TComment, TOffer } from '../../types/types';
-import { useActionCreators, useAppSelector } from '../../hooks/store';
-import { offersActions, offersSelectors } from '../../store/slices/slice';
+import { TComment} from '../../types/types';
+import { useActionCreators, /*useAppSelector*/ } from '../../hooks/store';
+import { offersActions, /*offersSelectors*/ } from '../../store/slices/slice';
 import { useEffect } from 'react';
-import { RequestStatus } from '../../const';
+//import { RequestStatus } from '../../const';
 
 
 type AppScreenProps = {
-  offers: TOffer[];
   comments: TComment[];
   authorizationStatus: AuthorizationStatus;
 }
 
-export default function App({offers,comments, authorizationStatus}: AppScreenProps): JSX.Element {
+export default function App({comments, authorizationStatus}: AppScreenProps): JSX.Element {
 
-  const status = useAppSelector(offersSelectors.offersStatus);
+  // const status = useAppSelector(offersSelectors.offersStatus);
 
   const {fetchAllOffers} = useActionCreators(offersActions);
 
@@ -29,9 +28,11 @@ export default function App({offers,comments, authorizationStatus}: AppScreenPro
     fetchAllOffers()
       .unwrap()
       .then(()=> {
+        // eslint-disable-next-line no-console
         console.log('SACCES');
       })
       .catch(() => {
+        // eslint-disable-next-line no-console
         console.log('ERROR');
       });
   });
@@ -39,6 +40,7 @@ export default function App({offers,comments, authorizationStatus}: AppScreenPro
   // if (status === RequestStatus.Loading) {
   //   return <div>Loading...</div>;
   // }
+
   return (
     <BrowserRouter>
       <Routes>
@@ -56,7 +58,7 @@ export default function App({offers,comments, authorizationStatus}: AppScreenPro
             <PrivateRoute
               authorizationStatus={AuthorizationStatus.Auth}
             >
-              <FavoritePage offers={offers}/>
+              <FavoritePage />
             </PrivateRoute>
           }
         />

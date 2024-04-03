@@ -10,7 +10,10 @@ type OfferCardProps = {
 }
 
 export default function OfferCard ({offer, handleHover}: OfferCardProps): JSX.Element {
-  const {price,rating,type, title, isPremium, isFavorite, images} = offer;
+
+
+  const {price,rating,type, title, isPremium, isFavorite, previewImage} = offer;
+
 
   const bookmarksButtonClassName = `place-card__bookmark-button button${isFavorite ? ' place-card__bookmark-button--active' : ''}`;
 
@@ -36,7 +39,7 @@ export default function OfferCard ({offer, handleHover}: OfferCardProps): JSX.El
           <span>
             <img
               className="place-card__image"
-              src={images.find((src)=> ({src}))}
+              src={previewImage}
               width={260}
               height={200}
               alt="Place image"

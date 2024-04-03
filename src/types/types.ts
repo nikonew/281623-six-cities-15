@@ -29,7 +29,7 @@ export type TOffer = {
     bedrooms: number;
     goods: string[];
     host: THost;
-    images: string[];
+    previewImage: string;
     maxAdults: number;
 }
 

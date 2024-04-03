@@ -4,6 +4,7 @@ import { reducer } from './store';
 
 
 export const store = configureStore({
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   reducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

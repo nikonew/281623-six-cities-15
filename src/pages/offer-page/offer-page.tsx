@@ -27,8 +27,9 @@ export default function OfferPage ({comments, authorizationStatus}: OfferPagePro
     return <NotFoundPage/>;
   }
 
-  const {images, rating, type, bedrooms, price, maxAdults, title, isPremium, description} = offerId;
-  const {name, avatarUrl, isPro} = offerId.host;
+
+  const {previewImage, rating, type, bedrooms, price, maxAdults, title, isPremium, description} = offerId;
+  // const {name, avatarUrl, isPro} = offerId.host;
 
   return (
     <div className="page">
@@ -66,19 +67,13 @@ export default function OfferPage ({comments, authorizationStatus}: OfferPagePro
         <section className="offer">
           <div className="offer__gallery-container container">
             <div className="offer__gallery">
-              {
-                images.map((src, index) => (
-
-                  // eslint-disable-next-line react/no-array-index-key
-                  <div className="offer__image-wrapper" key={index}>
-                    <img
-                      className="offer__image"
-                      src={src}
-                      alt="Photo studio"
-                    />
-                  </div>
-                ))
-              }
+              <div className="offer__image-wrapper">
+                <img
+                  className="offer__image"
+                  src={previewImage}
+                  alt="Photo studio"
+                />
+              </div>
             </div>
           </div>
           <div className="offer__container container">
@@ -136,14 +131,14 @@ export default function OfferPage ({comments, authorizationStatus}: OfferPagePro
                   <div className="offer__avatar-wrapper offer__avatar-wrapper--pro user__avatar-wrapper">
                     <img
                       className="offer__avatar user__avatar"
-                      src={avatarUrl}
+                      src={previewImage}
                       width={74}
                       height={74}
                       alt="Host avatar"
                     />
                   </div>
-                  <span className="offer__user-name">{name}</span>
-                  <span className="offer__user-status">{isPro ?? 'Pro'}</span>
+                  <span className="offer__user-name">nene</span>
+                  <span className="offer__user-status">rt</span>
                 </div>
                 <div className="offer__description">
                   <p className="offer__text">
