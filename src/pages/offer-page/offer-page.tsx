@@ -3,13 +3,12 @@ import Logo from '../../componets/logo/logo';
 import NotFoundPage from '../not-found-page/not-found-page';
 import Reviews from '../../componets/reviews/review';
 import { AuthorizationStatus } from '../../app/router/router/router';
-import Map from '../../componets/map/map';
+//import Map from '../../componets/map/map';
 import { useAppDispatch, useAppSelector } from '../../hooks/store';
-import { offersSelectors } from '../../store/slices/slice-offers';
 import { TComment } from '../../types/types';
 import { getRatingStars } from '../../util';
 import { MAX_RATING } from '../../const';
-//import { offerSelector } from '../../store/slices/slice-offer';
+import { offerSelector } from '../../store/slices/slice-offer';
 import { useEffect } from 'react';
 import { fetchOffer } from '../../store/thunk/offers-api';
 
@@ -21,24 +20,29 @@ type OfferPageProps = {
 export default function OfferPage ({comments, authorizationStatus}: OfferPageProps): JSX.Element {
   const dispatch = useAppDispatch();
 
+
+  const offerPage = useAppSelector(offerSelector.offer);
   const {id} = useParams();
-  const offers = useAppSelector(offersSelectors.offers);
-  //const offerPage = useAppSelector(offerSelector.offer);
-  const offerId = offers.find((offer) => offer.id === id);
-  const currentCity = useAppSelector(offersSelectors.currentCity);
 
   useEffect(() => {
     dispatch(fetchOffer(id as string));
-  },[id, dispatch]);
+
+  },[dispatch, id]);
 
 
-  if (!offerId) {
+  // if (status === RequestStatus.Failed || offerPage) {
+  //   return <NotFoundPage/>;
+  // }
+
+
+  if (!id) {
     return <NotFoundPage/>;
   }
 
 
-  //const {previewImage, rating, type, bedrooms, price, maxAdults, title, isPremium, description} = offers;
+  const {images, rating, type, bedrooms, price, maxAdults, title, isPremium, description} = offerPage;
   // const {name, avatarUrl, isPro} = offerId.host;
+
 
   return (
     <div className="page">
@@ -79,7 +83,7 @@ export default function OfferPage ({comments, authorizationStatus}: OfferPagePro
               <div className="offer__image-wrapper">
                 <img
                   className="offer__image"
-                  src={previewImage}
+                  src={images}
                   alt="Photo studio"
                 />
               </div>
@@ -112,7 +116,7 @@ export default function OfferPage ({comments, authorizationStatus}: OfferPagePro
                   {bedrooms} Bedrooms
                 </li>
                 <li className="offer__feature offer__feature--adults">
-              Max {maxAdults} adults
+                  Max {maxAdults} adults
                 </li>
               </ul>
               <div className="offer__price">
@@ -140,7 +144,7 @@ export default function OfferPage ({comments, authorizationStatus}: OfferPagePro
                   <div className="offer__avatar-wrapper offer__avatar-wrapper--pro user__avatar-wrapper">
                     <img
                       className="offer__avatar user__avatar"
-                      src={previewImage}
+                      src={images}
                       width={74}
                       height={74}
                       alt="Host avatar"
@@ -168,12 +172,12 @@ export default function OfferPage ({comments, authorizationStatus}: OfferPagePro
               </section>
             </div>
           </div>
-          <Map
+          {/* <Map
             className='offer__map'
             city={currentCity}
-            offers={offers}
-            activeOffer={offerId}
-          />
+            // offers={offers}
+            // activeOffer={offerId}
+          /> */}
         </section>
         <div className="container">
           <section className="near-places places">
