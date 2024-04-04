@@ -9,13 +9,13 @@ export const fetchAllOffers = createAsyncThunk<TOffer[], undefined, { extra: Axi
   return response.data;
 });
 
-export const fetchOffer = createAsyncThunk<FullOffer[], undefined, { extra: AxiosInstance}>
+export const fetchOffer = createAsyncThunk<FullOffer[], string, { extra: AxiosInstance}>
 ('fetchOffers/one', async (offerID, { extra: api}) => {
   const response = await api.get<FullOffer[]>(`${APIRoute.Offers}/${offerID}`);
   return response.data;
 });
 
-export const fetchNearBy = createAsyncThunk<TOffer[], undefined, { extra: AxiosInstance}>
+export const fetchNearBy = createAsyncThunk<TOffer[], string, { extra: AxiosInstance}>
 ('fetchOffers/near', async (offerID, { extra: api}) => {
   const response = await api.get<TOffer[]>(`${APIRoute.Offers}/${offerID}/nearby`);
   return response.data;
