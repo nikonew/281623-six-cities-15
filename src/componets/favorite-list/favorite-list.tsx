@@ -6,7 +6,8 @@ type FavoriteListProps = {
 
 export default function FavoriteList ({offer}: FavoriteListProps): JSX.Element {
 
-  const {price, isPremium, type, images, city} = offer;
+  const {price, isPremium, type, previewImage, city} = offer;
+
   return (
     <ul className="favorites__list">
       <li className="favorites__locations-items">
@@ -26,7 +27,7 @@ export default function FavoriteList ({offer}: FavoriteListProps): JSX.Element {
               <a href="#">
                 <img
                   className="place-card__image"
-                  src={images[0]}
+                  src={previewImage}
                   width={150}
                   height={110}
                   alt="Place image"
@@ -72,7 +73,7 @@ export default function FavoriteList ({offer}: FavoriteListProps): JSX.Element {
               <a href="#">
                 <img
                   className="place-card__image"
-                  src={images[1]}
+                  src={previewImage}
                   width={150}
                   height={110}
                   alt="Place image"
@@ -129,7 +130,7 @@ export default function FavoriteList ({offer}: FavoriteListProps): JSX.Element {
               <a href="#">
                 <img
                   className="place-card__image"
-                  src={images[2]}
+                  src={previewImage}
                   width={150}
                   height={110}
                   alt="Place image"

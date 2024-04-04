@@ -6,16 +6,15 @@ import OfferPage from '../../pages/offer-page/offer-page';
 import FavoritePage from '../../pages/favorite-page/favorite-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import PrivateRoute from '../router/private-route';
-import { TComment, TOffer } from '../../types/types';
+import { TComment} from '../../types/types';
 
 
 type AppScreenProps = {
-  offers: TOffer[];
   comments: TComment[];
   authorizationStatus: AuthorizationStatus;
 }
 
-export default function App({offers,comments, authorizationStatus}: AppScreenProps): JSX.Element {
+export default function App({comments, authorizationStatus}: AppScreenProps): JSX.Element {
 
   return (
     <BrowserRouter>
@@ -34,7 +33,7 @@ export default function App({offers,comments, authorizationStatus}: AppScreenPro
             <PrivateRoute
               authorizationStatus={AuthorizationStatus.Auth}
             >
-              <FavoritePage offers={offers}/>
+              <FavoritePage />
             </PrivateRoute>
           }
         />

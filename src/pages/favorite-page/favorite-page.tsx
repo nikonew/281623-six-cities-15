@@ -1,12 +1,12 @@
 import Logo from '../../componets/logo/logo';
-import { TOffer } from '../../types/types';
 import FavoriteList from '../../componets/favorite-list/favorite-list';
+import { useAppSelector } from '../../hooks/store';
+import { offersSelectors } from '../../store/slices/slice-offers';
 
-type FavoritePageProps = {
-  offers: TOffer[];
-}
 
-export default function FavoritePage ({offers}: FavoritePageProps): JSX.Element {
+export default function FavoritePage (): JSX.Element {
+
+  const offers = useAppSelector(offersSelectors.offers);
 
   return (
     <div className="page">

@@ -29,7 +29,7 @@ export type TOffer = {
     bedrooms: number;
     goods: string[];
     host: THost;
-    images: string[];
+    previewImage: string;
     maxAdults: number;
 }
 
@@ -39,4 +39,29 @@ export type TComment = {
     user: THost;
     comment: string;
     rating: number;
+}
+
+export type TSort = {
+    Popular: string;
+    LowToHigh: string;
+    HighToLow: string;
+    TopRated: string;
+}
+
+export type FullOffer = {
+    id: string;
+    title: string;
+    type: string;
+    price: number;
+    city: TCity;
+    location:TLocation;
+    isFavorite: boolean;
+    isPremium: boolean;
+    rating: number;
+    description: string;
+    bedrooms: number;
+    goods: string[];
+    host: THost;
+    image: string[];
+    maxAdults: number;
 }
