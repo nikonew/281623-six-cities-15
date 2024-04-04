@@ -4,11 +4,14 @@ import NotFoundPage from '../not-found-page/not-found-page';
 import Reviews from '../../componets/reviews/review';
 import { AuthorizationStatus } from '../../app/router/router/router';
 import Map from '../../componets/map/map';
-import { useAppSelector } from '../../hooks/store';
+import { useAppDispatch, useAppSelector } from '../../hooks/store';
 import { offersSelectors } from '../../store/slices/slice-offers';
 import { TComment } from '../../types/types';
 import { getRatingStars } from '../../util';
 import { MAX_RATING } from '../../const';
+//import { offerSelector } from '../../store/slices/slice-offer';
+import { useEffect } from 'react';
+import { fetchOffer } from '../../store/thunk/offers-api';
 
 type OfferPageProps = {
   comments: TComment[];
@@ -16,19 +19,25 @@ type OfferPageProps = {
 }
 
 export default function OfferPage ({comments, authorizationStatus}: OfferPageProps): JSX.Element {
+  const dispatch = useAppDispatch();
 
   const {id} = useParams();
   const offers = useAppSelector(offersSelectors.offers);
-
+  //const offerPage = useAppSelector(offerSelector.offer);
   const offerId = offers.find((offer) => offer.id === id);
   const currentCity = useAppSelector(offersSelectors.currentCity);
+
+  useEffect(() => {
+    dispatch(fetchOffer(id as string));
+  },[id, dispatch]);
+
 
   if (!offerId) {
     return <NotFoundPage/>;
   }
 
 
-  const {previewImage, rating, type, bedrooms, price, maxAdults, title, isPremium, description} = offerId;
+  //const {previewImage, rating, type, bedrooms, price, maxAdults, title, isPremium, description} = offers;
   // const {name, avatarUrl, isPro} = offerId.host;
 
   return (

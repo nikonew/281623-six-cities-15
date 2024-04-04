@@ -49,4 +49,5 @@ export const offerSlice = createSlice({
 });
 
 export const offerAction = offerSlice.actions;
+export const { clear } = offerSlice.actions;
 export const offerSelector = offerSlice.selectors;
