@@ -25,6 +25,7 @@ type OfferPageProps = {
 
 export default function OfferPage ({comments, authorizationStatus}: OfferPageProps): JSX.Element {
   const dispatchOfferPage = useAppDispatch();
+  const offers = useAppSelector(offersSelectors.offers);
   const currentCity = useAppSelector(offersSelectors.currentCity);
   const offerPage = useAppSelector(offerPageSelector.offerPage);
   const nearby = useAppSelector(offerPageSelector.nearByOffer);
@@ -51,6 +52,7 @@ export default function OfferPage ({comments, authorizationStatus}: OfferPagePro
     return <Spinner/>;
   }
 
+  const activeOfferId = offers.find((offer) => offer.id === id);
 
   return (
     <div className="page">
@@ -151,7 +153,7 @@ export default function OfferPage ({comments, authorizationStatus}: OfferPagePro
             className='offer__map'
             city={currentCity}
             offers={nearby}
-            activeOffer={offerId}
+            activeOffer={activeOfferId}
           />
         </section>
         <div className="container">
