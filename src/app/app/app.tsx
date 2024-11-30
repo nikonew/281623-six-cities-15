@@ -7,6 +7,9 @@ import FavoritePage from '../../pages/favorite-page/favorite-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import PrivateRoute from '../router/private-route';
 import { TComment} from '../../types/types';
+import { useAppDispatch } from '../../hooks/store';
+import { useEffect } from 'react';
+import { fetchAllOffers } from '../../store/thunk/offers-api';
 
 
 type AppScreenProps = {
@@ -15,8 +18,14 @@ type AppScreenProps = {
 }
 
 export default function App({comments, authorizationStatus}: AppScreenProps): JSX.Element {
+  const dispatch = useAppDispatch();
+
+  useEffect (() => {
+    dispatch(fetchAllOffers());
+  });
 
   return (
+
     <BrowserRouter>
       <Routes>
         <Route

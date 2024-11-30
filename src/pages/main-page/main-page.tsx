@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import OfferCard from '../../componets/offer-card/offer-card';
 import {TCity, TOffer } from '../../types/types';
 import { Nullable } from 'vitest';
@@ -11,7 +11,6 @@ import Sort from '../../componets/sort/sort-main';
 import City from '../../componets/city/city';
 import { sort } from '../../util';
 import Header from '../../componets/header/header';
-import { fetchAllOffers } from '../../store/thunk/offers-api';
 import Spinner from '../../componets/spinner-coponent/spinner';
 
 
@@ -36,10 +35,6 @@ export default function MainPage (): JSX.Element {
   const handleCityChange = (city: TCity) => {
     dispatch(setCurrentCity(city));
   };
-
-  useEffect (() => {
-    dispatch(fetchAllOffers());
-  });
 
   return (
     <div className="page page--gray page--main">
