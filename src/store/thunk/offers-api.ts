@@ -1,5 +1,5 @@
 import { AxiosInstance } from 'axios';
-import { FullOffer, TOffer } from '../../types/types';
+import { FullOffer, TComment, TOffer } from '../../types/types';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { APIRoute } from '../../const';
 
@@ -19,4 +19,10 @@ export const fetchNearBy = createAsyncThunk<TOffer[], string, { extra: AxiosInst
 ('fetchOffers/near', async (id, { extra: api}) => {
   const response = await api.get<TOffer[]>(`${APIRoute.Offers}/${id}/nearby`);
   return response.data.slice(0,3);
+});
+
+export const fetchAllReviews = createAsyncThunk<TComment[], string, { extra: AxiosInstance}>
+('fetchReviews/all', async (id , { extra: api}) => {
+  const response = await api.get<TComment[]>(`${APIRoute.Reviews}/${id}`);
+  return response.data;
 });

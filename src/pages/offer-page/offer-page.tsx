@@ -4,38 +4,39 @@ import Reviews from '../../componets/reviews/review';
 import { AuthorizationStatus } from '../../app/router/router/router';
 import Map from '../../componets/map/map';
 import { useAppDispatch, useAppSelector } from '../../hooks/store';
-import { TComment } from '../../types/types';
 import { getAdultsText, getBedroomsText, getRatingStars } from '../../util';
 import { MAX_RATING } from '../../const';
 import { offerPageSelector } from '../../store/slices/slice-offer';
 import { useEffect } from 'react';
-import { fetchOffer } from '../../store/thunk/offers-api';
+import { fetchAllReviews, fetchOffer } from '../../store/thunk/offers-api';
 import Spinner from '../../componets/spinner-coponent/spinner';
 import Header from '../../componets/header/header';
 import { offersSelectors } from '../../store/slices/slice-offers';
 import OfferGallery from '../../componets/offer-gallery/offer-gallery';
 import NearByContainer from '../../componets/near-by-container/near-by-container';
 import FavoriteButton from '../../componets/favorite-button/favorite-button';
+import { reviewsSelectors } from '../../store/slices/slice-reviews';
 
 
 type OfferPageProps = {
-  comments: TComment[];
   authorizationStatus: AuthorizationStatus;
 }
 
 
-export default function OfferPage ({comments, authorizationStatus}: OfferPageProps): JSX.Element {
+export default function OfferPage ({authorizationStatus}: OfferPageProps): JSX.Element {
   const dispatch = useAppDispatch();
   const offers = useAppSelector(offersSelectors.offers);
   const currentCity = useAppSelector(offersSelectors.currentCity);
   const offerPage = useAppSelector(offerPageSelector.offerPage);
   const nearby = useAppSelector(offerPageSelector.nearByOffer);
+  const comments = useAppSelector(reviewsSelectors.reviews);
   const {id} = useParams();
   const offerId = id?.trim() ?? '';
 
 
   useEffect(() => {
     dispatch(fetchOffer(offerId));
+    dispatch(fetchAllReviews(offerId));
   },[dispatch, offerId]);
 
   if(offerId === '') {

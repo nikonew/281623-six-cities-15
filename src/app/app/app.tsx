@@ -6,18 +6,16 @@ import OfferPage from '../../pages/offer-page/offer-page';
 import FavoritePage from '../../pages/favorite-page/favorite-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import PrivateRoute from '../router/private-route';
-import { TComment} from '../../types/types';
 import { useAppDispatch } from '../../hooks/store';
 import { useEffect } from 'react';
 import { fetchAllOffers } from '../../store/thunk/offers-api';
 
 
 type AppScreenProps = {
-  comments: TComment[];
   authorizationStatus: AuthorizationStatus;
 }
 
-export default function App({comments, authorizationStatus}: AppScreenProps): JSX.Element {
+export default function App({authorizationStatus}: AppScreenProps): JSX.Element {
   const dispatch = useAppDispatch();
 
   useEffect (() => {
@@ -30,7 +28,7 @@ export default function App({comments, authorizationStatus}: AppScreenProps): JS
       <Routes>
         <Route
           path={AppRoute.Main}
-          element={<MainPage/>}
+          element={<MainPage authorizationStatus={AuthorizationStatus.Auth}/>}
         />
         <Route
           path={AppRoute.Login}
@@ -48,7 +46,7 @@ export default function App({comments, authorizationStatus}: AppScreenProps): JS
         />
         <Route
           path={`${AppRoute.Offer}/:id`}
-          element={<OfferPage comments={comments} authorizationStatus= {authorizationStatus}/>}
+          element={<OfferPage authorizationStatus= {authorizationStatus}/>}
         />
         <Route
           path="*"

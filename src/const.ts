@@ -42,7 +42,8 @@ export const SORT_OPTIONS: Array<SortingTypes> = [
 export enum APIRoute {
   Offers = '/offers',
   Login = '/login',
-  Logout = '/logout'
+  Logout = '/logout',
+  Reviews = '/comments',
 }
 
 export const MAX_RATING = 5;

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { TOffer } from '../../types/types';
-import { AppRoute, AuthorizationStatus } from '../../app/router/router/router';
+import { AppRoute } from '../../app/router/router/router';
 import { getRatingStars } from '../../util';
 import { MAX_RATING } from '../../const';
 import FavoriteButton from '../favorite-button/favorite-button';
@@ -8,13 +8,13 @@ import FavoriteButton from '../favorite-button/favorite-button';
 type OfferCardProps = {
   offer: TOffer;
   handleHover: (offer?: TOffer) => void;
-  authorizationStatus: AuthorizationStatus;
+  isAuth: boolean;
 }
 
-export default function OfferCard ({offer, handleHover, authorizationStatus}: OfferCardProps): JSX.Element {
+export default function OfferCard ({offer, handleHover, isAuth}: OfferCardProps): JSX.Element {
 
 
-  const {price,rating,type, title, isPremium, isFavorite, previewImage} = offer;
+  const {id, price,rating,type, title, isPremium, isFavorite, previewImage} = offer;
 
 
   const handleHoverMouseOn = () => {
@@ -35,7 +35,7 @@ export default function OfferCard ({offer, handleHover, authorizationStatus}: Of
         isPremium ? <div className="place-card__mark"><span>Premium</span></div> : null
       }
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <Link to={`${AppRoute.Offer}/${offer.id}`}>
+        <Link to={`${AppRoute.Offer}/${id}`}>
           <img
             className="place-card__image"
             src={previewImage}
@@ -53,7 +53,7 @@ export default function OfferCard ({offer, handleHover, authorizationStatus}: Of
               /&nbsp;night
             </span>
           </div>
-          <FavoriteButton className={'place-card'} iconWidth={'18'} iconHeight={'19'} isFavorite={isFavorite} isAuth={authorizationStatus === AuthorizationStatus.Auth}/>
+          <FavoriteButton className={'place-card'} iconWidth={'18'} iconHeight={'19'} isFavorite={isFavorite} isAuth={isAuth}/>
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">

@@ -12,9 +12,12 @@ import City from '../../componets/city/city';
 import { sort } from '../../util';
 import Header from '../../componets/header/header';
 import Spinner from '../../componets/spinner-coponent/spinner';
+import { AuthorizationStatus } from '../../app/router/router/router';
 
-
-export default function MainPage (): JSX.Element {
+type MainProps = {
+  authorizationStatus: AuthorizationStatus;
+}
+export default function MainPage ({authorizationStatus}:MainProps): JSX.Element {
 
   const [activeOffer, setActiveOffer] = useState<Nullable<TOffer>>(null);
   const [currentSortingType, setСurrentSortingType] = useState(SortingTypes.Popular);
@@ -71,7 +74,7 @@ export default function MainPage (): JSX.Element {
                       <OfferCard
                         key={offer.id}
                         offer={offer}
-                        handleHover={handleHover}
+                        handleHover={handleHover} isAuth={authorizationStatus === AuthorizationStatus.Auth}
                       />
                     ))}
                   </div>
