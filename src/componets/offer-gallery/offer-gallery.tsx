@@ -1,17 +1,18 @@
-// type props = {
-//     images: string[];
-// }
+type props = {
+    image: string;
+}
 
-export default function OfferGallery (): JSX.Element {
+export default function OfferGallery ({image}: props): JSX.Element {
+
+
   return (
-    <div className="offer__gallery">
-      <div className="offer__image-wrapper">
-        <img
-          className="offer__image"
-          src="img"
-          alt="Photo studio"
-        />;
-      </div>
+
+    <div className="offer__image-wrapper">
+      <img
+        className="offer__image"
+        src={image}
+        alt="Photo studio"
+      />;
     </div>
   );
 }

@@ -1,6 +1,8 @@
+import { Link } from 'react-router-dom';
 import { MAX_RATING } from '../../const';
 import { TOffer } from '../../types/types';
-import { getRatingStars } from '../../util';
+import { getRatingStars, scrollToTop } from '../../util';
+import { AppRoute } from '../../app/router/router/router';
 
 type NearByProps = {
     nearBy: TOffer;
@@ -8,14 +10,15 @@ type NearByProps = {
 
 export default function NearByOffers ({nearBy}: NearByProps): JSX.Element {
 
-  const {previewImage, price, isFavorite, rating,type, title} = nearBy;
+  const {isPremium, previewImage, price, isFavorite, rating,type, title, id} = nearBy;
 
   const bookmarksButtonClassName = `place-card__bookmark-button button${isFavorite ? ' place-card__bookmark-button--active' : ''}`;
 
   return (
     <article className="near-places__card place-card">
+      {isPremium ? <div className="place-card__mark"><span>Premium</span></div> : null}
       <div className="near-places__image-wrapper place-card__image-wrapper">
-        <a href="#">
+        <Link onClick={() => scrollToTop()} to={`${AppRoute.Offer}/${id}`}>
           <img
             className="place-card__image"
             src={previewImage}
@@ -23,7 +26,7 @@ export default function NearByOffers ({nearBy}: NearByProps): JSX.Element {
             height={200}
             alt="Place image"
           />
-        </a>
+        </Link>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">

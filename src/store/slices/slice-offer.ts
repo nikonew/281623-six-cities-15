@@ -5,7 +5,7 @@ import { fetchNearBy, fetchOffer } from '../thunk/offers-api';
 
 
 type OfferPageState = {
-    info: FullOffer[] | null;
+    info: FullOffer | null;
     nearby: TOffer[];
     status: RequestStatus;
 }

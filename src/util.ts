@@ -24,3 +24,10 @@ export const sort = (offers: TOffer[], currentSortingType: SortingTypes): TOffer
 export const getBedroomsText = (bedrooms: number) => `${bedrooms} Bedroom${bedrooms > 1 ? 's' : ''}`;
 export const getAdultsText = (adults: number) => `Max ${adults} adult${adults > 1 ? 's' : ''}`;
 
+export const scrollToTop = (behavior: ScrollBehavior = 'auto') => {
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior
+  });
+};
